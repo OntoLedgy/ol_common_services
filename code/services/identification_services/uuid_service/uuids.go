@@ -1,4 +1,4 @@
-package identity_management_services
+package uuid_service
 
 import (
 	"fmt"
@@ -19,15 +19,12 @@ func GetUUID(
 
 	generated_uuid := new(UUIDs)
 
-	//uuid.SwitchFormatToUpper(uuid.FormatCanonicalCurly)
-
 	generated_uuid.UUID = new(uuid.UUID)
 
 	switch uuid_type {
 
 	case 1:
 		// Creating UUIDs Version 4
-		// TODO issue with IDE - reports error with return types.
 		*generated_uuid.UUID =
 			uuid.NewV4()
 
@@ -42,7 +39,6 @@ func GetUUID(
 		}
 
 	}
-
 	return generated_uuid, nil
 
 }

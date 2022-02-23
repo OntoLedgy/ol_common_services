@@ -2,13 +2,13 @@ package testing
 
 import (
 	"fmt"
-	"github.com/OntoLedgy/ol_common_services/code/services/identity_management_services"
+	"github.com/OntoLedgy/ol_common_services/code/services/identification_services/uuid_service"
 	"testing"
 )
 
 func TestUuidsTesting(t *testing.T) {
 
-	uuid, err := identity_management_services.GetUUID(
+	uuid, err := uuid_service.GetUUID(
 		1,
 		"")
 
