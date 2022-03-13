@@ -6,7 +6,7 @@ import (
 )
 
 type UUIDs struct {
-	*uuid.UUID
+	uuid.UUID
 }
 
 func GetUUID(
@@ -19,18 +19,18 @@ func GetUUID(
 
 	generated_uuid := &UUIDs{}
 
-	generated_uuid.UUID = new(uuid.UUID)
+	generated_uuid.UUID = uuid.UUID{}
 
 	switch uuid_type {
 
 	case 1:
 		// Creating UUIDs Version 4
-		*generated_uuid.UUID =
+		generated_uuid.UUID =
 			uuid.NewV4()
 
 	case 2:
 		// Parsing UUIDs from string input
-		*generated_uuid.UUID, uuid_error =
+		generated_uuid.UUID, uuid_error =
 			uuid.FromString(
 				seeding_string[0])
 
