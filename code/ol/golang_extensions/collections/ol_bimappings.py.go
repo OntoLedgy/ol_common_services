@@ -25,7 +25,7 @@ func (olBimapping OlBimappings) Initialise(mapForBiMapping map[any]any) {
 //def try_get_range_using_domain(
 //self,
 //domain_key):
-func (olBimapping OlBimappings) tryGetRangeUsingDomain(domainKey any) any {
+func (olBimapping OlBimappings) TryGetRangeUsingDomain(domainKey any) any {
 
 	//range_value = \
 	rangeValue :=
@@ -43,7 +43,7 @@ func (olBimapping OlBimappings) tryGetRangeUsingDomain(domainKey any) any {
 //def try_get_domain_using_range(
 //self,
 //range_key):
-func (olBimapping OlBimappings) tryGetDomainUsingRange(rangeKey any) any {
+func (olBimapping OlBimappings) TryGetDomainUsingRange(rangeKey any) any {
 
 	//domain_value = \
 	domainValue :=
@@ -59,7 +59,7 @@ func (olBimapping OlBimappings) tryGetDomainUsingRange(rangeKey any) any {
 
 //def getRange(
 //self):
-func (olBimapping OlBimappings) getRange() []any {
+func (olBimapping OlBimappings) GetRange() []any {
 
 	//range = \
 	mapRange :=
@@ -72,7 +72,7 @@ func (olBimapping OlBimappings) getRange() []any {
 }
 
 //def get_domain(
-func (olBimapping OlBimappings) getDomain() []any {
+func (olBimapping OlBimappings) GetDomain() []any {
 
 	//self):
 	//domain = \
@@ -87,7 +87,7 @@ func (olBimapping OlBimappings) getDomain() []any {
 
 //def get_range_keyed_on_domain(
 //self):
-func (olBimapping OlBimappings) getRangeKeyedOnDomain() OlMaps {
+func (olBimapping OlBimappings) GetRangeKeyedOnDomain() OlMaps {
 
 	//range_keyed_on_domain = \
 	rangeKeyedOnDomain :=
@@ -102,7 +102,7 @@ func (olBimapping OlBimappings) getRangeKeyedOnDomain() OlMaps {
 
 //def get_domain_keyed_on_range(
 //self):
-func (olBimapping OlBimappings) getDomainKeyedOnRange() OlMaps {
+func (olBimapping OlBimappings) GetDomainKeyedOnRange() OlMaps {
 
 	//domain_keyed_on_range = \
 	domainKeyedOnRange :=
@@ -130,7 +130,7 @@ func (olBimapping OlBimappings) populateInternalDictionaries(
 	for domainValue, rangeValue := range mapForBiMapping {
 
 		//self.add_mapping(
-		olBimapping.addMapping(
+		olBimapping.AddMapping(
 			//domain_value=domain_value,
 			domainValue,
 			//range_value=range_value)
@@ -140,7 +140,7 @@ func (olBimapping OlBimappings) populateInternalDictionaries(
 
 //def add_mapping(
 //self,
-func (olBimapping OlBimappings) addMapping(
+func (olBimapping OlBimappings) AddMapping(
 	//domain_value,
 	DomainValue any,
 	//range_value):
