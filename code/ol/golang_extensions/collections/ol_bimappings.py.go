@@ -160,7 +160,8 @@ func (olBimapping OlBimappings) AddMapping(
 //@staticmethod
 //def __populate_range_keyed_on_range(
 //map: NfDictionaries) -> NfDictionaries:
-func (olBimapping OlBimappings) populateRangeKeyedOnRange(olMap OlMaps) OlMaps {
+func (olBimapping OlBimappings) populateRangeKeyedOnRange(
+	olMap OlMaps) OlMaps {
 
 	//domain_keyed_on_range = \
 	domainKeyedOnRange :=

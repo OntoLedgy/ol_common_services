@@ -6,36 +6,41 @@ import "time"
 
 //from time import strftime
 //from time import gmtime
-//
 
 //def now_time_as_string() \
+//-> str:
 func NowTimeAsString() string {
 
-	NowAsDataTimeString :=
-		time.Now().String()
+	utc := time.Now().UTC()
 
+	//now_as_datetime_string = \
+	//strftime(
+	//"%Y-%m-%d %H:%M:%S",
+	//gmtime())
+
+	NowAsDataTimeString :=
+		utc.Format("2006-01-02 15:04:05")
+
+	//return \
+	//now_as_datetime_string
 	return NowAsDataTimeString
 
 }
 
-//-> str:
-//now_as_datetime_string = \
-//strftime(
-//"%Y-%m-%d %H:%M:%S",
-//gmtime())
-//
-//return \
-//now_as_datetime_string
-//
-//
 //def now_time_as_string_for_files() \
 //-> str:
-//return \
-//strftime(
-//"%Y_%m_%d_%H_%M_%S",
-//gmtime())
-//
-//
+func NowTimeAsStringForFiles() string {
+
+	//return \
+	//strftime(
+	//"%Y_%m_%d_%H_%M_%S",
+	//gmtime())
+
+	utc := time.Now().UTC()
+	return utc.Format("2006_01_02_15_04_05")
+
+}
+
 //def time_as_string_yyyymmddhhmm(
 //structured_time: time.struct_time) \
 //-> str:
@@ -46,8 +51,7 @@ func NowTimeAsString() string {
 //
 //return \
 //formatted_string
-//
-//
+
 //def now_time_as_string_yyyymmddhhmm() \
 //-> str:
 //time_now = \
@@ -59,8 +63,7 @@ func NowTimeAsString() string {
 //
 //return \
 //formatted_string
-//
-//
+
 //def __get_formatted_string_from_structured_time(
 //format: str,
 //structured_time: time.struct_time) -> str:
