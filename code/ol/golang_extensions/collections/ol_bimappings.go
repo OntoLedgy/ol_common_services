@@ -6,8 +6,8 @@ package collections
 
 //class NfBimappings:
 type OlBimappings struct {
-	domainKeyedOnRange OlMaps
-	rangeKeyedOnDomain OlMaps
+	domainKeyedOnRange *OlMaps
+	rangeKeyedOnDomain *OlMaps
 }
 
 //def __init__(
@@ -87,7 +87,7 @@ func (olBimapping OlBimappings) GetDomain() []any {
 
 //def get_range_keyed_on_domain(
 //self):
-func (olBimapping OlBimappings) GetRangeKeyedOnDomain() OlMaps {
+func (olBimapping OlBimappings) GetRangeKeyedOnDomain() *OlMaps {
 
 	//range_keyed_on_domain = \
 	rangeKeyedOnDomain :=
@@ -102,7 +102,7 @@ func (olBimapping OlBimappings) GetRangeKeyedOnDomain() OlMaps {
 
 //def get_domain_keyed_on_range(
 //self):
-func (olBimapping OlBimappings) GetDomainKeyedOnRange() OlMaps {
+func (olBimapping OlBimappings) GetDomainKeyedOnRange() *OlMaps {
 
 	//domain_keyed_on_range = \
 	domainKeyedOnRange :=
@@ -122,11 +122,12 @@ func (olBimapping OlBimappings) populateInternalDictionaries(
 	//self.__domain_keyed_on_range = \
 	//NfDictionaries()
 	olBimapping.domainKeyedOnRange =
-		OlMaps{}
+		new(OlMaps)
 
 	//self.__range_keyed_on_domain = \
 	//NfDictionaries()
-	olBimapping.rangeKeyedOnDomain = OlMaps{}
+	olBimapping.rangeKeyedOnDomain =
+		new(OlMaps)
 
 	//for domain_value, range_value in map.items():
 	for domainValue, rangeValue := range mapForBiMapping {
@@ -148,12 +149,14 @@ func (olBimapping OlBimappings) AddMapping(
 	//range_value):
 	RangeValue any) {
 
+	domainKeyedOnRange := *olBimapping.domainKeyedOnRange
 	//self.__domain_keyed_on_range[range_value] = \
-	olBimapping.domainKeyedOnRange[RangeValue] =
+	domainKeyedOnRange[RangeValue] =
 		//domain_value
 		DomainValue
 
-	olBimapping.rangeKeyedOnDomain[DomainValue] =
+	rangeKeyedOnDomain := *olBimapping.rangeKeyedOnDomain
+	rangeKeyedOnDomain[DomainValue] =
 		//self.__range_keyed_on_domain[domain_value] = \
 		RangeValue
 	//range_value
