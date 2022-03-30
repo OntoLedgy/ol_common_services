@@ -6,26 +6,30 @@ package collections
 
 //class NfBimappings:
 type OlBimappings struct {
-	domainKeyedOnRange *OlMaps
-	rangeKeyedOnDomain *OlMaps
+	domainKeyedOnRange OlMaps
+	rangeKeyedOnDomain OlMaps
 }
 
 //def __init__(
 //self,
 //map: dict):
-func (olBimapping OlBimappings) Initialise(mapForBiMapping map[any]any) {
+func (olBimapping *OlBimappings) Initialise(mapForBiMapping *map[any]any) {
+
+	if mapForBiMapping == nil {
+		mapForBiMapping = new(map[any]any)
+	}
 
 	//NfBimappings.__populate_internal_dictionaries(
 	olBimapping.populateInternalDictionaries(
 		//map=map)
-		mapForBiMapping)
+		*mapForBiMapping)
 	//)
 }
 
 //def try_get_range_using_domain(
 //self,
 //domain_key):
-func (olBimapping OlBimappings) TryGetRangeUsingDomain(domainKey any) any {
+func (olBimapping *OlBimappings) TryGetRangeUsingDomain(domainKey any) any {
 
 	//range_value = \
 	rangeValue :=
@@ -43,7 +47,7 @@ func (olBimapping OlBimappings) TryGetRangeUsingDomain(domainKey any) any {
 //def try_get_domain_using_range(
 //self,
 //range_key):
-func (olBimapping OlBimappings) TryGetDomainUsingRange(rangeKey any) any {
+func (olBimapping *OlBimappings) TryGetDomainUsingRange(rangeKey any) any {
 
 	//domain_value = \
 	domainValue :=
@@ -59,7 +63,7 @@ func (olBimapping OlBimappings) TryGetDomainUsingRange(rangeKey any) any {
 
 //def getRange(
 //self):
-func (olBimapping OlBimappings) GetRange() []any {
+func (olBimapping *OlBimappings) GetRange() []any {
 
 	//range = \
 	mapRange :=
@@ -72,7 +76,7 @@ func (olBimapping OlBimappings) GetRange() []any {
 }
 
 //def get_domain(
-func (olBimapping OlBimappings) GetDomain() []any {
+func (olBimapping *OlBimappings) GetDomain() []any {
 
 	//self):
 	//domain = \
@@ -87,7 +91,7 @@ func (olBimapping OlBimappings) GetDomain() []any {
 
 //def get_range_keyed_on_domain(
 //self):
-func (olBimapping OlBimappings) GetRangeKeyedOnDomain() *OlMaps {
+func (olBimapping *OlBimappings) GetRangeKeyedOnDomain() OlMaps {
 
 	//range_keyed_on_domain = \
 	rangeKeyedOnDomain :=
@@ -102,7 +106,7 @@ func (olBimapping OlBimappings) GetRangeKeyedOnDomain() *OlMaps {
 
 //def get_domain_keyed_on_range(
 //self):
-func (olBimapping OlBimappings) GetDomainKeyedOnRange() *OlMaps {
+func (olBimapping *OlBimappings) GetDomainKeyedOnRange() OlMaps {
 
 	//domain_keyed_on_range = \
 	domainKeyedOnRange :=
@@ -116,18 +120,18 @@ func (olBimapping OlBimappings) GetDomainKeyedOnRange() *OlMaps {
 //def __populate_internal_dictionaries(
 //self,
 //map: dict):
-func (olBimapping OlBimappings) populateInternalDictionaries(
+func (olBimapping *OlBimappings) populateInternalDictionaries(
 	mapForBiMapping map[any]any) {
 
 	//self.__domain_keyed_on_range = \
 	//NfDictionaries()
 	olBimapping.domainKeyedOnRange =
-		new(OlMaps)
+		OlMaps{}
 
 	//self.__range_keyed_on_domain = \
 	//NfDictionaries()
 	olBimapping.rangeKeyedOnDomain =
-		new(OlMaps)
+		OlMaps{}
 
 	//for domain_value, range_value in map.items():
 	for domainValue, rangeValue := range mapForBiMapping {
@@ -143,20 +147,20 @@ func (olBimapping OlBimappings) populateInternalDictionaries(
 
 //def add_mapping(
 //self,
-func (olBimapping OlBimappings) AddMapping(
+func (olBimapping *OlBimappings) AddMapping(
 	//domain_value,
 	DomainValue any,
 	//range_value):
 	RangeValue any) {
 
-	domainKeyedOnRange := *olBimapping.domainKeyedOnRange
+	//domainKeyedOnRange := *olBimapping.domainKeyedOnRange
 	//self.__domain_keyed_on_range[range_value] = \
-	domainKeyedOnRange[RangeValue] =
+	olBimapping.domainKeyedOnRange[RangeValue] =
 		//domain_value
 		DomainValue
 
-	rangeKeyedOnDomain := *olBimapping.rangeKeyedOnDomain
-	rangeKeyedOnDomain[DomainValue] =
+	//rangeKeyedOnDomain := *olBimapping.rangeKeyedOnDomain
+	olBimapping.rangeKeyedOnDomain[DomainValue] =
 		//self.__range_keyed_on_domain[domain_value] = \
 		RangeValue
 	//range_value
@@ -165,7 +169,7 @@ func (olBimapping OlBimappings) AddMapping(
 //@staticmethod
 //def __populate_range_keyed_on_range(
 //map: NfDictionaries) -> NfDictionaries:
-func (olBimapping OlBimappings) populateRangeKeyedOnRange(
+func (olBimapping *OlBimappings) populateRangeKeyedOnRange(
 	olMap OlMaps) OlMaps {
 
 	//domain_keyed_on_range = \
