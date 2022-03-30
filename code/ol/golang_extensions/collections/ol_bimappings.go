@@ -121,6 +121,8 @@ func (olBimapping OlBimappings) populateInternalDictionaries(
 
 	//self.__domain_keyed_on_range = \
 	//NfDictionaries()
+	olBimapping.domainKeyedOnRange =
+		OlMaps{}
 
 	//self.__range_keyed_on_domain = \
 	//NfDictionaries()

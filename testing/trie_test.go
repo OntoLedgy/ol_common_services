@@ -1,25 +1,20 @@
 package testing
 
 import (
-	"fmt"
-	"github.com/OntoLedgy/ol_common_services/code/services/graph_services/tree_services"
+	"github.com/OntoLedgy/ol_common_services/code/services/graph_services/tree_services/tries"
 	"testing"
 )
 
 func TestDataTrie(t *testing.T) {
 
 	string_list_to_process := []string{
-		"123213",
-		"12321",
-		"12321",
-		"123455435",
-		"12324",
-		"12234567"}
+		"123",
+		"1231",
+		"12312",
+		"123124"}
 
-	trie := tree_services.CreateTrie(string_list_to_process)
+	trie := tries.Create(string_list_to_process)
 
-	fmt.Println(trie.Nodes)
+	trie.Nodes[0].PrintTree()
 
 }
-
-//TODO - move test data out to testing
