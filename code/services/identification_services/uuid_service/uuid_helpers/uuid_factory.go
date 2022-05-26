@@ -1,5 +1,9 @@
 package uuid_helpers
 
+//
+//import uuid
+//import base64
+
 import (
 	"encoding/ascii85"
 	"fmt"
@@ -7,11 +11,6 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-//
-//import uuid
-//import base64
-//
-//
 //def create_new_uuid_string():
 func CreateNewUuidString() string {
 
@@ -21,7 +20,9 @@ func CreateNewUuidString() string {
 		uuid.NewV1()
 
 	//uuid_as_base85 = \
-	uuidAsBase85Encode := make([]byte, ascii85.MaxEncodedLen(len(newUuid)))
+	uuidAsBase85Encode := make(
+		[]byte,
+		ascii85.MaxEncodedLen(len(newUuid)))
 	//base64.b85encode(
 	ascii85.Encode(
 		uuidAsBase85Encode,
@@ -30,13 +31,16 @@ func CreateNewUuidString() string {
 
 	//uuid_as_base85_string = \
 	//uuid_as_base85.decode()
-	uuidAsBase85Decode := make([]byte, ascii85.MaxEncodedLen(len(uuidAsBase85Encode)))
+	uuidAsBase85Decode := make(
+		[]byte,
+		ascii85.MaxEncodedLen(len(uuidAsBase85Encode)))
 
 	ascii85.Decode(uuidAsBase85Decode,
 		uuidAsBase85Encode,
 		true)
 
-	uuidAsBase85String := string(uuidAsBase85Decode)
+	uuidAsBase85String := string(
+		uuidAsBase85Decode)
 
 	//return \
 	//uuid_as_base85_string
@@ -44,8 +48,6 @@ func CreateNewUuidString() string {
 
 }
 
-//
-//
 //def create_new_uuid() \
 //-> str:
 func CreateNewUuid() string {
@@ -55,9 +57,23 @@ func CreateNewUuid() string {
 		//str(uuid.uuid1())
 		uuid.NewV1().String()
 
-	return newUuid
 	//return \
 	//new_uuid
+	return newUuid
+
+}
+
+func CreateNewUuid4() string {
+
+	//new_uuid = \
+	newUuid :=
+		//str(uuid.uuid1())
+		uuid.NewV4().String()
+
+	//return \
+	//new_uuid
+	return newUuid
+
 }
 
 //def create_uuid_from_base85_string(

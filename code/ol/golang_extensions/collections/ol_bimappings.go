@@ -124,13 +124,13 @@ func (olBimapping *OlBimappings) populateInternalDictionaries(
 	mapForBiMapping map[any]any) {
 
 	//self.__domain_keyed_on_range = \
-	//NfDictionaries()
 	olBimapping.domainKeyedOnRange =
+		//NfDictionaries()
 		OlMaps{}
 
 	//self.__range_keyed_on_domain = \
-	//NfDictionaries()
 	olBimapping.rangeKeyedOnDomain =
+		//NfDictionaries()
 		OlMaps{}
 
 	//for domain_value, range_value in map.items():
@@ -153,17 +153,16 @@ func (olBimapping *OlBimappings) AddMapping(
 	//range_value):
 	RangeValue any) {
 
-	//domainKeyedOnRange := *olBimapping.domainKeyedOnRange
 	//self.__domain_keyed_on_range[range_value] = \
 	olBimapping.domainKeyedOnRange[RangeValue] =
 		//domain_value
 		DomainValue
 
-	//rangeKeyedOnDomain := *olBimapping.rangeKeyedOnDomain
+	//self.__range_keyed_on_domain[domain_value] = \
 	olBimapping.rangeKeyedOnDomain[DomainValue] =
-		//self.__range_keyed_on_domain[domain_value] = \
+		//range_value
 		RangeValue
-	//range_value
+
 }
 
 //@staticmethod
