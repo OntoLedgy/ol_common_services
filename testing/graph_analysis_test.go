@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"github.com/OntoLedgy/ol_common_services/code/services/graph_services/graph_core_objects"
 	"github.com/OntoLedgy/ol_common_services/code/services/identification_services/uuid_service/uuid_helpers"
+	yourbasic "github.com/yourbasic/graph"
 	"log"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -31,6 +33,32 @@ func TestGraph(t *testing.T) {
 
 	}
 	fmt.Printf("graph %s\n", simpleGraph.Nodes())
+}
+
+func TestGraphYourBasic(t *testing.T) {
+
+	filePath := `D:\\S\\go\\src\\github.com\\OntoLedgy\\ol_common_services\\testing\\data\\same_as_links.csv`
+
+	records := GetGraphData(filePath)
+	fmt.Println(records)
+
+	simpleGraph := yourbasic.New(20)
+
+	for index, record := range records {
+
+		fmt.Printf("index %v, record : %s\n", index, record)
+
+		place1, _ := strconv.Atoi(record[0])
+		place2, _ := strconv.Atoi(record[1])
+
+		simpleGraph.Add(
+			place1,
+			place2)
+
+	}
+	fmt.Printf("graph:%v", simpleGraph)
+	fmt.Printf("graph is Acyclic ? : %v\n", yourbasic.Acyclic(simpleGraph))
+	fmt.Printf("graph components ? : %v\n", yourbasic.Components(simpleGraph))
 }
 
 func TestNodes(t *testing.T) {

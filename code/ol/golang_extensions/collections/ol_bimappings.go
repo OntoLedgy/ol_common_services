@@ -1,7 +1,6 @@
 package collections
 
 //https://github.com/boro-alpha/nf_common/blob/master/nf_common_source/code/nf/python_extensions/collections/nf_bimappings.py
-
 //from nf_common_source.code.nf.python_extensions.collections.nf_dictionaries import NfDictionaries
 
 //class NfBimappings:

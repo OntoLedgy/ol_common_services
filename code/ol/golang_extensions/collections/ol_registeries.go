@@ -105,7 +105,7 @@ func (olRegistries *OlRegistries) Initialise() {
 //csv_folder=Folders(output_csv_folder))
 //
 //db_connection.close()
-//
+
 //def __export_dataframes_as_csv_and_xlsx(
 //self,
 //output_csv_folder: Path,
@@ -130,7 +130,7 @@ func (olRegistries *OlRegistries) Initialise() {
 //output_csv_folder=output_csv_folder,
 //dataframe=dataframe,
 //output_xlsx_folder=output_xlsx_folder)
-//
+
 //@staticmethod
 //def __export_dataframe_as_csv_and_xlsx(
 //collection_type: CollectionTypes,
@@ -168,7 +168,7 @@ func (olRegistries *OlRegistries) Initialise() {
 //table=dataframe,
 //full_filename=str(xlsx_filepath),
 //sheet_name=str(collection_type.collection_name))
-//
+
 //def export_dataframes(
 //self,
 //short_name: str,
@@ -192,14 +192,14 @@ func (olRegistries *OlRegistries) Initialise() {
 //quotechar='"',
 //index=False,
 //quoting=csv.QUOTE_ALL)
-//
+
 //def add_table(
 //self,
 //table: DataFrame,
 //collection_type: CollectionTypes):
 //self.dictionary_of_collections[collection_type] = \
 //table
-//
+
 //def get_collection(
 //self,
 //collection_type: CollectionTypes,
@@ -217,7 +217,7 @@ func (olRegistries *OlRegistries) Initialise() {
 //
 //return \
 //collection
-//
+
 //def replace_collection(
 //self,
 //collection_type: CollectionTypes,
@@ -225,7 +225,7 @@ func (olRegistries *OlRegistries) Initialise() {
 //self.add_table(
 //table=collection,
 //collection_type=collection_type)
-//
+
 //def create_or_update_summary_table(
 //self):
 //summary_dictionary = \
@@ -257,7 +257,7 @@ func (olRegistries *OlRegistries) Initialise() {
 //
 //self.dictionary_of_collections[CommonCollectionTypes.SUMMARY_TABLE] = \
 //summary_table
-//
+
 //def update(
 //self,
 //collection_type: CollectionTypes,
@@ -279,7 +279,7 @@ func (olRegistries *OlRegistries) Initialise() {
 //
 //self.dictionary_of_collections[collection_type] = \
 //merged_collections
-//
+
 //@staticmethod
 //def __add_counts_to_dictionary(
 //summary_dictionary: dict,

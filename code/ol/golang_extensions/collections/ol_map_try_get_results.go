@@ -9,7 +9,6 @@ type OlMapTryGetResults struct {
 
 //def __init__(
 //self):
-
 func (olMapTryGetResult OlMapTryGetResults) Initalise() {
 
 	//self.__key_exists = \

@@ -9,15 +9,16 @@ type CollectionTypes int
 
 //TODO : Needs to be  implemented
 //def __collection_name(
-//self) \
-//-> str:
-//raise \
-//NotImplementedError
-//
+
+func (collectionType CollectionTypes) CollectionName() string {
+	//self) \
+	//-> str:
+
+	//raise \
+	//NotImplementedError
+	return "no implemented"
+}
+
 //collection_name = \
 //property(
 //fget=__collection_name)
-func (collectionType CollectionTypes) CollectionName() string {
-
-	return "no implemented"
-}
