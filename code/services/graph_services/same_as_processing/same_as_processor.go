@@ -1,12 +1,27 @@
 package same_as_processing
 
-import "github.com/OntoLedgy/ol_common_services/code/services/graph_services/graph_core_objects"
+import (
+	"fmt"
+	"github.com/OntoLedgy/ol_common_services/code/services/graph_services/graph_core_objects"
+	"gonum.org/v1/gonum/graph"
+	"gonum.org/v1/gonum/graph/topo"
+)
 
-func process_same_as_list(edgesList []*graph_core_objects.Edges) []*graph_core_objects.Edges {
+func ProcessSameAsLinks(edgesList graph.Edges) [][]graph.Node {
 
-	simpleGraph := graph_core_objects.CreateNewGraph(0)
+	simpleGraph := graph_core_objects.CreateNewGraph("undirected")
+	edgesList.Reset()
+	edgesList.Next()
 
-	simpleGraph.DirectedGraph.Edges()
+	for edge := edgesList.Edge(); edge != nil; edgesList.Next() {
 
-	return edgesList
+		simpleGraph.UndirectedGraph.SetEdge(edge)
+		edgesList.Next()
+		fmt.Println("added : ", edge)
+		edge = edgesList.Edge()
+	}
+
+	connectedNodes := topo.ConnectedComponents(simpleGraph.UndirectedGraph)
+
+	return connectedNodes
 }

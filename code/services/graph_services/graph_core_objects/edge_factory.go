@@ -7,7 +7,7 @@ func CreateEdge(
 	node2 *Nodes,
 	graph *Graphs) *Edges {
 
-	edge := graph.NewEdge(
+	edge := graph.DirectedGraph.NewEdge(
 		node1,
 		node2)
 
