@@ -22,6 +22,6 @@ func ProcessSameAsLinks(edgesList graph.Edges) [][]graph.Node {
 	}
 
 	connectedNodes := topo.ConnectedComponents(simpleGraph.UndirectedGraph)
-
+	//TODO -- Debug here.
 	return connectedNodes
 }

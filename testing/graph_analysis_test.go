@@ -90,6 +90,8 @@ func TestSameAsProcessing(t *testing.T) {
 
 	var sameAsNodeGroups = same_as_processing.ProcessSameAsLinks(sameAsEdges)
 
+	fmt.Printf("found node: %s", simpleGraph.NodeByDisplayName("3"))
+
 	fmt.Printf("same as node groups: %s", sameAsNodeGroups)
 }
 

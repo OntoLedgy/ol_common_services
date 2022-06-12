@@ -21,36 +21,46 @@ type Graphs struct {
 func (graph *Graphs) AddNode(
 	NodeDisplayName string) *Nodes {
 
-	nodeUuid := uuid_helpers.CreateNewUuid4()
+	//TODO -- check if node exists.
+	//TODO -- add option: use display name as a key or uuid
+	//TODO
 
-	newNode := CreateNode(
-		nodeUuid,
-		NodeDisplayName,
-		graph)
+	node := graph.NodeByDisplayName(NodeDisplayName)
 
-	prev := len(
-		gonumgraph.NodesOf(
-			graph.Nodes()))
+	if node == nil {
 
-	graph.addNode(newNode.Node)
+		nodeUuid := uuid_helpers.CreateNewUuid4()
 
-	curr := len(
-		gonumgraph.NodesOf(
-			graph.Nodes()))
+		newNode := CreateNode(
+			nodeUuid,
+			NodeDisplayName,
+			graph)
 
-	if curr != prev+1 {
-		fmt.Printf("AddNode failed to mutate graph: curr graph order != prev graph order+1, %d != %d", curr, prev+1)
+		prev := len(
+			gonumgraph.NodesOf(
+				graph.Nodes()))
+
+		graph.addNode(newNode.Node)
+
+		curr := len(
+			gonumgraph.NodesOf(
+				graph.Nodes()))
+
+		if curr != prev+1 {
+			fmt.Printf("AddNode failed to mutate graph: curr graph order != prev graph order+1, %d != %d", curr, prev+1)
+		}
+
+		if graph.Node(newNode.Node.ID()) == nil {
+			fmt.Printf("AddNode failed to add node to graph trying to add %#v", newNode)
+		}
+
+		graph.graphNodes = append(
+			graph.graphNodes,
+			newNode)
+		node = newNode
 	}
 
-	if graph.Node(newNode.Node.ID()) == nil {
-		fmt.Printf("AddNode failed to add node to graph trying to add %#v", newNode)
-	}
-
-	graph.graphNodes = append(
-		graph.graphNodes,
-		newNode)
-
-	return newNode
+	return node
 }
 
 func (graph *Graphs) addNode(
@@ -104,6 +114,19 @@ func (graph *Graphs) Node(
 		return graph.DirectedGraph.Node(nodeId)
 
 	}
+}
+
+func (graph *Graphs) NodeByDisplayName(
+	nodeDisplayName string) *Nodes {
+
+	for _, node := range graph.graphNodes {
+		if node.NodeDisplayName == nodeDisplayName {
+			return node
+		}
+	}
+
+	return nil
+
 }
 
 func (graph *Graphs) AddEdge(
