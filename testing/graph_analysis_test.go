@@ -16,7 +16,7 @@ func TestGraph(t *testing.T) {
 
 	filePath := `D:\\S\\go\\src\\github.com\\OntoLedgy\\ol_common_services\\testing\\data\\same_as_links.csv`
 
-	records := GetGraphData(filePath)
+	records := getGraphData(filePath)
 	fmt.Println(records)
 
 	simpleGraph := graph_core_objects.CreateNewGraph("directed")
@@ -36,7 +36,7 @@ func TestGraphYourBasic(t *testing.T) {
 
 	filePath := `D:\\S\\go\\src\\github.com\\OntoLedgy\\ol_common_services\\testing\\data\\same_as_links.csv`
 
-	records := GetGraphData(filePath)
+	records := getGraphData(filePath)
 	fmt.Println(records)
 
 	simpleGraph := yourbasic.New(20)
@@ -61,8 +61,7 @@ func TestSameAsProcessing(t *testing.T) {
 
 	filePath := `D:\\S\\go\\src\\github.com\\OntoLedgy\\ol_common_services\\testing\\data\\same_as_links.csv`
 
-	records := GetGraphData(filePath)
-	fmt.Println(records)
+	records := getGraphData(filePath)
 
 	simpleGraph := graph_core_objects.CreateNewGraph("undirected")
 
@@ -90,9 +89,7 @@ func TestSameAsProcessing(t *testing.T) {
 
 	var sameAsNodeGroups = same_as_processing.ProcessSameAsLinks(sameAsEdges)
 
-	fmt.Printf("found node: %s", simpleGraph.NodeByDisplayName("3"))
-
-	fmt.Printf("same as node groups: %s", sameAsNodeGroups)
+	fmt.Printf("same as node group 1 : %s", sameAsNodeGroups[0])
 }
 
 func TestNodes(t *testing.T) {
@@ -129,18 +126,22 @@ func TestEdges(t *testing.T) {
 	fmt.Printf("graph %s\n", simpleGraph.DirectedGraph.Nodes())
 }
 
-func GetGraphData(filePath string) [][]string {
+func getGraphData(filePath string) [][]string {
 
 	file, fileOpenError := os.Open(filePath)
+
 	if fileOpenError != nil {
 		panic("cant open file")
 	}
 	defer file.Close()
 
 	csvReader := csv.NewReader(file)
+
 	records, fileReadError := csvReader.ReadAll()
+
 	if fileReadError != nil {
 		log.Fatal("Unable to parse file as CSV for "+filePath, fileReadError)
 	}
+
 	return records
 }

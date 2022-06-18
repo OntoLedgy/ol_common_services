@@ -21,12 +21,11 @@ type Graphs struct {
 func (graph *Graphs) AddNode(
 	NodeDisplayName string) *Nodes {
 
-	//TODO -- check if node exists.
 	//TODO -- add option: use display name as a key or uuid
-	//TODO
 
 	node := graph.NodeByDisplayName(NodeDisplayName)
 
+	//check if node already exists.
 	if node == nil {
 
 		nodeUuid := uuid_helpers.CreateNewUuid4()

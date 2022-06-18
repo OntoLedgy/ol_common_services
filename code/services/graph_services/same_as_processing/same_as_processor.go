@@ -9,19 +9,26 @@ import (
 
 func ProcessSameAsLinks(edgesList graph.Edges) [][]graph.Node {
 
-	simpleGraph := graph_core_objects.CreateNewGraph("undirected")
+	simpleGraph :=
+		graph_core_objects.CreateNewGraph(
+			"undirected")
+
 	edgesList.Reset()
 	edgesList.Next()
 
 	for edge := edgesList.Edge(); edge != nil; edgesList.Next() {
 
-		simpleGraph.UndirectedGraph.SetEdge(edge)
-		edgesList.Next()
+		simpleGraph.UndirectedGraph.SetEdge(
+			edge)
+
 		fmt.Println("added : ", edge)
+
 		edge = edgesList.Edge()
 	}
 
-	connectedNodes := topo.ConnectedComponents(simpleGraph.UndirectedGraph)
-	//TODO -- Debug here.
+	connectedNodes :=
+		topo.ConnectedComponents(
+			simpleGraph.UndirectedGraph)
+
 	return connectedNodes
 }
