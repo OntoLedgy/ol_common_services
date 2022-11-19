@@ -4,9 +4,13 @@ import (
 	"encoding/csv"
 	"fmt"
 	"github.com/OntoLedgy/ol_common_services/code/services/graph_services/graph_core_objects"
+	"github.com/OntoLedgy/ol_common_services/code/services/graph_services/path_services"
 	"github.com/OntoLedgy/ol_common_services/code/services/graph_services/same_as_processing"
 	yourbasic "github.com/yourbasic/graph"
+	"gonum.org/v1/gonum/graph/path"
+	"gonum.org/v1/gonum/graph/simple"
 	"log"
+	"math"
 	"os"
 	"strconv"
 	"testing"
@@ -126,6 +130,42 @@ func TestEdges(t *testing.T) {
 	fmt.Printf("graph %s\n", simpleGraph.DirectedGraph.Nodes())
 }
 
+func TestPath(t *testing.T) {
+
+	edges := []simple.WeightedEdge{
+		{F: simple.Node('A'), T: simple.Node('B'), W: 9},
+		{F: simple.Node('B'), T: simple.Node('C'), W: 14},
+		{F: simple.Node('C'), T: simple.Node('D'), W: 15},
+		{F: simple.Node('D'), T: simple.Node('E'), W: 12},
+		{F: simple.Node('E'), T: simple.Node('F'), W: 10},
+		{F: simple.Node('E'), T: simple.Node('B'), W: 8},
+		{F: simple.Node('B'), T: simple.Node('F'), W: 7},
+		{F: simple.Node('A'), T: simple.Node('E'), W: 8},
+		{F: simple.Node('A'), T: simple.Node('F'), W: 14},
+		{F: simple.Node('F'), T: simple.Node('D'), W: 12},
+		{F: simple.Node('C'), T: simple.Node('F'), W: 8},
+	}
+
+	testWeightedDirectedGraph := simple.NewWeightedUndirectedGraph(0, math.Inf(1))
+
+	spanningTreeWeightedDirectedGraph := simple.NewWeightedUndirectedGraph(0, math.Inf(1))
+
+	for _, e := range edges {
+		testWeightedDirectedGraph.SetWeightedEdge(e)
+	}
+
+	fmt.Println("checking Minimum Spanning Tree using Prim")
+
+	minimumSpanningTreePrimValue := path.Prim(spanningTreeWeightedDirectedGraph, testWeightedDirectedGraph)
+
+	fmt.Printf("minimum spanning Tree Prim value: %f\n", minimumSpanningTreePrimValue)
+
+	fmt.Println("getting Minimum Spanning Tree using path and cost")
+
+	path_services.GetMinimumSpanningTree(testWeightedDirectedGraph)
+
+}
+
 func getGraphData(filePath string) [][]string {
 
 	file, fileOpenError := os.Open(filePath)
@@ -145,3 +185,77 @@ func getGraphData(filePath string) [][]string {
 
 	return records
 }
+
+//func iterateOverAllNodes(ids []int64, shortestPaths path.AllShortest, testWeightedDirectedGraph *simple.WeightedUndirectedGraph) {
+//	visited := make(map[int64]bool)
+//
+//	path := []int64{}
+//
+//	for sourceNodeIndex, sourceNodeId := range ids {
+//
+//		iterateOverAllConnectedNodes(ids, shortestPaths, visited, testWeightedDirectedGraph, path, sourceNodeId, sourceNodeIndex)
+//
+//	}
+//}
+//func iterateOverAllConnectedNodes(ids []int64, shortestPaths path.AllShortest, visited map[int64]bool, testWeightedDirectedGraph *simple.WeightedUndirectedGraph, path []int64, sourceNodeId int64, sourceNodeIndex int) {
+//	for targetNodeIndex, targetNodeId := range ids {
+//
+//		shortestPath, weight, unique := shortestPaths.Between(sourceNodeId, targetNodeId)
+//
+//		fmt.Printf(
+//			"Source Node index:%v, source node: %c, Target Node index:%v, targetNode:%c, Shortest Path Length:%v, weight:%v \n",
+//			sourceNodeIndex,
+//			sourceNodeId,
+//			targetNodeIndex,
+//			targetNodeId,
+//			len(shortestPath),
+//			weight)
+//
+//		if math.IsInf(weight, -1) {
+//
+//			fmt.Printf(
+//				"negative cycle in path from %c to %c unique=%t\n",
+//				sourceNodeId,
+//				targetNodeId,
+//				unique)
+//
+//		}
+//
+//		if sourceNodeId != targetNodeId {
+//			visited[sourceNodeId] = true
+//			hamiltonianPathForGraph, _ := findShortestDistanceConnectingAllNodes(testWeightedDirectedGraph, sourceNodeId, &targetNodeId, visited, path)
+//			fmt.Println(hamiltonianPathForGraph)
+//		}
+//		path = []int64{sourceNodeId}
+//
+//	}
+//}
+//func findShortestDistanceConnectingAllNodes(currentGraph *simple.WeightedUndirectedGraph, orig int64, dest *int64, visited map[int64]bool, path []int64) ([]int64, bool) {
+//
+//	if len(visited) == currentGraph.Edges().Len() {
+//		if path[len(path)-1] == *dest {
+//			return path, true
+//		}
+//
+//		return nil, false
+//	}
+//	fmt.Printf("origin :%c\n", orig)
+//
+//	nodesConnectedToSource := currentGraph.From(orig)
+//
+//	numberOfNodesInSubGraph := nodesConnectedToSource.Len()
+//
+//	nodesConnectedToSource.Reset()
+//	currentConnectedNode := nodesConnectedToSource.Node()
+//	nodesConnectedToSource.Next()
+//	//lengthOfVisitedList := len(visited)
+//
+//	for listIndex := 0; listIndex < numberOfNodesInSubGraph; nodesConnectedToSource.Next() {
+//		listIndex += 1
+//		currentConnectedNode = nodesConnectedToSource.Node()
+//		fmt.Printf("targetNode Value :%c\n", currentConnectedNode.ID())
+//
+//	}
+//
+//	return nil, false
+//}
