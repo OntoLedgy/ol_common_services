@@ -28,9 +28,12 @@ func (applicationRunner *ApplicationRunner) RunCommand() io.Writer {
 		" /C "+applicationRunner.CommandArguments,
 		" ")
 
-	commandHandler := exec.Command(applicationRunner.CommandString, args...)
+	commandHandler := exec.Command(
+		applicationRunner.CommandString, args...)
 
-	commandHandler.Dir = filepath.Join(applicationRunner.CommandEnvironmentDrive, applicationRunner.CommandEnvironmentDirectory)
+	commandHandler.Dir = filepath.Join(
+		applicationRunner.CommandEnvironmentDrive+":\\",
+		applicationRunner.CommandEnvironmentDirectory)
 
 	commandHandler.Stdout = mw
 
