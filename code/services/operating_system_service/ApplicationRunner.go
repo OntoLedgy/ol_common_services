@@ -24,7 +24,9 @@ func (applicationRunner *ApplicationRunner) RunCommand() {
 
 	mw := io.MultiWriter(os.Stdout, &stdBuffer)
 
-	args := strings.Split(" /C "+applicationRunner.commandArguments, " ")
+	args := strings.Split(
+		" /C "+applicationRunner.commandArguments,
+		" ")
 
 	commandHandler := exec.Command(applicationRunner.commandString, args...)
 
