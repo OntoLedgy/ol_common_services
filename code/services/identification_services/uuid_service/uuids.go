@@ -10,8 +10,8 @@ type UUIDs struct {
 }
 
 func GetUUID(
-	uuid_type int,
-	seeding_string ...string) (
+	uuidType int,
+	seedingString ...string) (
 	*UUIDs,
 	error) {
 
@@ -21,7 +21,7 @@ func GetUUID(
 
 	generated_uuid.UUID = uuid.UUID{}
 
-	switch uuid_type {
+	switch uuidType {
 
 	case 1:
 		// Creating UUIDs Version 4
@@ -32,7 +32,7 @@ func GetUUID(
 		// Parsing UUIDs from string input
 		generated_uuid.UUID, uuid_error =
 			uuid.FromString(
-				seeding_string[0])
+				seedingString[0])
 
 		if uuid_error != nil {
 			fmt.Printf("Something went wrong: %s", uuid_error)

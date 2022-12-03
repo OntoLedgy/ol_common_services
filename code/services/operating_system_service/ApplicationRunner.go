@@ -18,7 +18,7 @@ type ApplicationRunner struct {
 	CommandEnvironmentDirectory string
 }
 
-func (applicationRunner *ApplicationRunner) RunCommand() {
+func (applicationRunner *ApplicationRunner) RunCommand() io.Writer {
 
 	var stdBuffer bytes.Buffer
 
@@ -42,4 +42,6 @@ func (applicationRunner *ApplicationRunner) RunCommand() {
 	}
 
 	fmt.Printf("output: \n%s", stdBuffer.String())
+
+	return mw
 }
