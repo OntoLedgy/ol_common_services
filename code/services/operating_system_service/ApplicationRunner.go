@@ -12,10 +12,10 @@ import (
 )
 
 type ApplicationRunner struct {
-	commandString               string
-	commandArguments            string
-	commandEnvironmentDrive     string
-	commandEnvironmentDirectory string
+	CommandString               string
+	CommandArguments            string
+	CommandEnvironmentDrive     string
+	CommandEnvironmentDirectory string
 }
 
 func (applicationRunner *ApplicationRunner) RunCommand() {
@@ -25,12 +25,12 @@ func (applicationRunner *ApplicationRunner) RunCommand() {
 	mw := io.MultiWriter(os.Stdout, &stdBuffer)
 
 	args := strings.Split(
-		" /C "+applicationRunner.commandArguments,
+		" /C "+applicationRunner.CommandArguments,
 		" ")
 
-	commandHandler := exec.Command(applicationRunner.commandString, args...)
+	commandHandler := exec.Command(applicationRunner.CommandString, args...)
 
-	commandHandler.Dir = filepath.Join(applicationRunner.commandEnvironmentDrive, applicationRunner.commandEnvironmentDirectory)
+	commandHandler.Dir = filepath.Join(applicationRunner.CommandEnvironmentDrive, applicationRunner.CommandEnvironmentDirectory)
 
 	commandHandler.Stdout = mw
 
